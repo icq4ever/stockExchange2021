@@ -3,6 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"dependencies": {
+		"axios": "^0.21.1"
 	},
 	"devDependencies": {
 		"asar": "^3.0.3",
@@ -12,9 +13,9 @@
 	"scripts": {
 		"start": "electron index.js",
 		"test": "echo 'Error:no test specified' && exit 1",
-		"build:linux64" : "electron-packager . projectName --platform=linux --arch=x64",
-		"build:win64" : "electron-packager . projectName --platform=win32 --arch=x64",
-		"build:mac" : "electron-packager . projectName --platform=darwin --arch=x64",
-		"build:all" : "electron-packager . --all"
+		"build:linux64": "electron-packager . projectName --platform=linux --arch=x64",
+		"build:win64": "electron-packager . projectName --platform=win32 --arch=x64",
+		"build:mac": "electron-packager . projectName --platform=darwin --arch=x64",
+		"build:all": "electron-packager . --all"
 	}
 }

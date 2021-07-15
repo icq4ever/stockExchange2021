@@ -1,5 +1,11 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	#container 
+		#p5Container
+	.loading
+		.mdl-spinner.mdl-js-spinner.is-active
+		.message loading...
+
+	script(src="javascripts/sketch.js" crossorigin="anonymous")
+	script(src="javascripts/launcher.js" crossorigin="anonymous")
