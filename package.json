@@ -1,0 +1,20 @@
+{
+	"name": "projectName",
+	"version": "0.0.1",
+	"private": true,
+	"dependencies": {
+	},
+	"devDependencies": {
+		"asar": "^3.0.3",
+		"electron": "^13.1.6",
+		"electron-packager": "^15.2.0"
+	},
+	"scripts": {
+		"start": "electron index.js",
+		"test": "echo 'Error:no test specified' && exit 1",
+		"build:linux64" : "electron-packager . projectName --platform=linux --arch=x64",
+		"build:win64" : "electron-packager . projectName --platform=win32 --arch=x64",
+		"build:mac" : "electron-packager . projectName --platform=darwin --arch=x64",
+		"build:all" : "electron-packager . --all"
+	}
+}
