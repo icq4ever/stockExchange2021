@@ -2,7 +2,7 @@
 let font;
 let mm, dd, yy;
 let dateString;
-let padding = 60;
+let padding;
 
 let stockRaw = [0, 0, 0, 0, 0, 0];
 let stockPercentageString = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
@@ -32,6 +32,7 @@ function setup(){
 }
 
 function draw(){
+	padding = windowHeight * 0.06;
 	mm = month();
 	dd = day();
 	yy = year();
@@ -53,8 +54,8 @@ function draw(){
 	pop();
 
 	push();
-	translate(0, 260);
-	textAlign(LEFT);
+	translate(0, windowHeight*0.2);
+	textAlign(LEFT, TOP);
 	for(let i=0; i<6; i++){
 		textAlign(LEFT);
 		text(stockNames[i] + '[' + stockSymbols[i] + ']', padding, i*(windowHeight*0.13));
@@ -113,6 +114,7 @@ function keyTyped(){
 }
 
 function windowResized(){
+	padding = windowHeight * 0.1;
 	console.log(width + ' ' + height);
 	resizeCanvas(document.getElementById('p5Container').offsetWidth, document.getElementById('container').offsetHeight);
 }
