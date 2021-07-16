@@ -1,11 +1,25 @@
+
+let font;
+let mm, dd, yy;
+let dateString;
+let padding = 60;
+
 let stockRaw = [0, 0, 0, 0, 0, 0];
 let stockPercentageString = ['0.00%', '0.00%', '0.00%', '0.00%', '0.00%', '0.00%'];
 
 let stockSymbols = ['^KQ11', '^DJI', 'SX5E.SW', 'H78.SI', 'GPCST001.FGI', 'SNSX50.BO'];
-let stockName = ['Kosdaq Composite Index', 'Dow Jones Industrial Average', 'Invesco Markets plc - Invesco EURO STOXX 50 UCITS ETF', 'Hongkong Land Holdings Limited', 'FTSE Coast Kuwait 40 Index', 'S&P BSE SENSEX 50 Index']
+let stockNames = [
+	'KOSDAQ', 
+	'Dow Jones', 
+	'EURO STOXX 50', 
+	'CHINA', 
+	'KUWAIT', 
+	'S&P BSE SENSEX'
+];
+
 // preload like image, json fonts.
 function preload(){
-	
+	font = loadFont('fonts/PretendardVariable.ttf');
 }
 
 function setup(){
@@ -13,15 +27,41 @@ function setup(){
 	
 	var canvas = createCanvas(canvasDiv.offsetWidth, canvasDiv.offsetHeight);
 	canvas.parent('p5Container');
-	updateStock();
+
+	// updateStock();
 }
 
 function draw(){
+	mm = month();
+	dd = day();
+	yy = year();
+
+	if(mm < 10)	mm = "0" + mm;
+	if(dd < 10)	dd = "0" + dd;
+	dateString = dd + "/" + mm + "/" + yy;
+	// document.getElementById('dateContainer').textContent = dateString;
+
 	clear();
-	
-	textAlign(CENTER);
-	fill(0);
-	text("HELLO WORLD", document.getElementById('p5Container').offsetWidth/2, 20);
+
+	fill('#FFFFFF');
+	textFont(font);
+	textSize(windowHeight * 0.06);
+
+	push();
+	textAlign(RIGHT, TOP);
+	text(dateString, windowWidth-padding, padding);
+	pop();
+
+	push();
+	translate(0, 260);
+	textAlign(LEFT);
+	for(let i=0; i<6; i++){
+		textAlign(LEFT);
+		text(stockNames[i] + '[' + stockSymbols[i] + ']', padding, i*(windowHeight*0.13));
+		textAlign(RIGHT);
+		text(stockPercentageString[i], windowWidth - padding, i*(windowHeight*0.13));
+	}
+	pop();
 }
 
 function drawDate(){
@@ -35,6 +75,11 @@ async function updateStock() {
 		getStock(stockSymbols[i], i);
 	}
 }
+
+function dummyUpdateStock(){
+	console.log("stock info updated");
+}
+
 function getStock(_stockCode, _index){
 	const options = {
 		method: 'GET',
@@ -61,6 +106,11 @@ function getStock(_stockCode, _index){
 	});
 }
 
+function keyTyped(){
+	if(key === 'u' ){
+		updateStock();
+	}
+}
 
 function windowResized(){
 	console.log(width + ' ' + height);
