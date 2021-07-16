@@ -11,6 +11,7 @@ function createWindow() {
 		webPreferences: {
 			nodeIntegration: true,
 		},
+		fullscreen : true
 	});
 	
 	mainWindow.loadURL("http://localhost:3000");
